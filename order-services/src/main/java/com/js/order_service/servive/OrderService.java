@@ -52,12 +52,16 @@ public class OrderService {
 	        List<String> skuCodes = order.getOrderLineItems().stream()
 	        		.map(OrderLineItems::getSkuCode)
 	        		.toList();
-	        
-	        InventoryResponse[] result = webClientBuilder.build().get().uri("http://inventory-service/api/inventory", 
+	        InventoryResponse[] result = null;
+	        try {
+	        	result = webClientBuilder.build().get().uri("https://inventory-service/api/inventory", 
 	        		uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
 	        .retrieve()
 	        .bodyToMono(InventoryResponse[].class)
 	        .block();
+	        } catch(Exception e) {
+	        	System.out.println(e.getMessage());
+	        }
 	        
 	        boolean allProductsInStock = Arrays.stream(result).allMatch(res -> res.isInStock());
 	        
@@ -67,7 +71,7 @@ public class OrderService {
 	        	try {
 					future.get(10000, TimeUnit.MILLISECONDS);
 				} catch (Exception e) {
-					log.info(e.getMessage());
+					System.out.println(e.getMessage());
 				} 
 	        } else {
 	        	throw new IllegalArgumentException("Product is not in stock");

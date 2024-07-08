@@ -64,6 +64,9 @@ public class OrderService {
 	        }
 	        
 	        boolean allProductsInStock = Arrays.stream(result).allMatch(res -> res.isInStock());
+	        if(result == null || result.length == 0) {
+	        	allProductsInStock = false;
+	        }
 	        
 	        if(allProductsInStock) {
 	        	orderRepository.save(order);
@@ -78,7 +81,7 @@ public class OrderService {
 	        }
 
 	       
-		return "SUCCESS";
+		return new String("SUCCESS");
 	}
 	
 	private OrderLineItems mapToDto(OrderLineItemsDto orderLineItemsDto) {

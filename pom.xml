@@ -25,6 +25,7 @@
 		<module>api-gateway</module>
 		<module>notification-service</module>
 		<module>identity-service</module>
+		<module>cart-service</module>
 	</modules>
 	<build>
 	<pluginManagement>

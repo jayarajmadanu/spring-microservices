@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest {
-	private String name;
-	private String description;
-	private BigDecimal price;
+	private String productName;
+	private String productDescription;
+	private BigDecimal productPrice;
+	private String productImageUrl;
+	private float productOffer;
+
 }

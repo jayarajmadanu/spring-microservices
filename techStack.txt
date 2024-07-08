@@ -1,3 +1,7 @@
 Circute Breaker - Reselence4J
 Trace - Sleuth, Zipkin
 Security and JWT to be implemnented
+
+
+create cert
+keytool -genkey -alias spring-https -storetype JKS -keyalg RSA -keysize 2048 -validity 365 -keystore js.project.jks

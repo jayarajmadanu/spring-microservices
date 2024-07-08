@@ -21,9 +21,11 @@ public class ProductService {
 	
 	public void createProduct(ProductRequest productRequest) {
 		Product product =  Product.builder()
-				.name(productRequest.getName())
-				.price(productRequest.getPrice())
-				.description(productRequest.getDescription())
+				.name(productRequest.getProductName())
+				.price(productRequest.getProductPrice())
+				.description(productRequest.getProductDescription())
+				.offer(productRequest.getProductOffer())
+				.imageUrl(productRequest.getProductImageUrl())
 				.build();
 		
 		productRepository.save(product);
@@ -37,10 +39,17 @@ public class ProductService {
 	
 	private ProductResponse mapToProductResponse(Product product) {
 		return ProductResponse.builder()
-				.id(product.getId())
-				.name(product.getName())
-				.description(product.getDescription())
-				.price(product.getPrice())
+				.productId(product.getId())
+				.productName(product.getName())
+				.productDescription(product.getDescription())
+				.productPrice(product.getPrice())
+				.productOffer(product.getOffer())
+				.productImageUrl(product.getImageUrl())
 				.build();
+	}
+
+	public List<ProductResponse> getAllProductsByProductId(List<String> productIds) {
+		List<Product> products = productRepository.findAllById(productIds);
+		return products.stream().map(this::mapToProductResponse).toList();
 	}
 }

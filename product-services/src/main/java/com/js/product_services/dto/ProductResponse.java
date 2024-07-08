@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponse {
-	private String id;
-	private String name;
-	private String description;
-	private BigDecimal price;
+	private String productId;
+	private String productName;
+	private String productDescription;
+	private BigDecimal productPrice;
+	private String productImageUrl;
+	private float productOffer;
 }
